@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #101827;
+  color: white;
+}
+
+.app {
+  max-width: 420px;
+  margin: auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.card {
+  background: #1b2638;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.card p {
+  color: #b8c1d1;
+}
+
+.card h2 {
+  font-size: 32px;
+  margin: 10px 0;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+#message {
+  margin-top: 20px;
+  }
