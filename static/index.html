@@ -1,1 +1,185 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RewardRush</title>
+
+  <!-- Telegram Mini App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Monetag Rewarded Interstitial -->
+  <script
+    src="//libtl.com/sdk.js"
+    data-zone="11721313"
+    data-sdk="show_11721313">
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #ffd700;
+    }
+
+    .card {
+      background: #151c32;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    }
+
+    .balance {
+      text-align: center;
+    }
+
+    .balance h2 {
+      color: #ffd700;
+      font-size: 36px;
+      margin: 10px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .gold-button {
+      background: #ffd700;
+      color: #111;
+    }
+
+    .dark-button {
+      background: #222b46;
+      color: white;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .message {
+      text-align: center;
+      margin: 15px 0;
+      color: #ffd700;
+      min-height: 20px;
+    }
+
+    .referral {
+      word-break: break-all;
+      background: #0b1020;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>🚀 RewardRush</h1>
+    <p>Earn rewards every day</p>
+  </div>
+
+  <div class="card balance">
+    <p>Your Balance</p>
+    <h2 id="balance">0</h2>
+    <p>Points</p>
+  </div>
+
+  <div class="message" id="message"></div>
+
+  <div class="card">
+    <h3>🎁 Daily Reward</h3>
+    <p>Claim your daily reward.</p>
+
+    <button class="gold-button" id="dailyReward">
+      Claim Daily Reward
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>🎬 Watch Ad & Earn</h3>
+    <p>Watch a rewarded advertisement.</p>
+
+    <button class="dark-button" id="watchAd">
+      🎬 Watch Ad & Earn
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>👥 Invite Friends</h3>
+    <p>Invite friends and earn rewards.</p>
+
+    <div class="referral" id="referralLink">
+      Loading referral link...
+    </div>
+
+    <button class="gold-button" id="copyReferral">
+      📋 Copy Referral Link
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>🏆 Leaderboard</h3>
+    <div id="leaderboard">
+      Loading...
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>💰 Withdraw</h3>
+    <p>Withdraw your available rewards.</p>
+
+    <button class="dark-button" id="withdraw">
+      Withdraw
+    </button>
+  </div>
+
+</div>
+
+<script>
+
+  const tg = window.Telegram.WebApp;
+
+  tg.ready();
+  tg.expand();
+
+  let currentUser = null;
+
+ 
